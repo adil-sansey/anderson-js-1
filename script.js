@@ -1,30 +1,20 @@
 'use strict';
 
-const value = +prompt('Введите число:');
-const base = +prompt('Введите систему счисления (от 2 до 36 включительно):');
+const VALUE = +prompt('Введите число:');
+const BASE = +prompt('Введите систему счисления (от 2 до 36 включительно):');
 
 function isNumberValid(value) {
-  const isInfinity = value === Infinity || value === -Infinity;
-
-  if (isInfinity || isNaN(value)) {
-    return false;
-  }
-
-  return true;
+  return !(isNaN(value) || !isFinite(value));
 }
 
 function isBaseValid(value) {
-  if (value < 2 || value > 36) {
-    return false;
-  }
-
-  return true;
+  return value >= 2 && value <= 36;
 }
 
-const isBothNumbersValid = isNumberValid(value) && isNumberValid(base);
+const isBothNumbersValid = isNumberValid(VALUE) && isNumberValid(BASE);
 
-if (!isBothNumbersValid || !isBaseValid(base)) {
+if (!isBothNumbersValid || !isBaseValid(BASE)) {
   console.log('Некорректный ввод!');
 } else {
-  console.log(value.toString(base));
+  console.log(VALUE.toString(BASE));
 }

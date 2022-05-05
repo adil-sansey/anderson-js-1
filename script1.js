@@ -1,13 +1,7 @@
 'use strict';
 
 function isNumberValid(value) {
-  const isInfinity = value === Infinity || value === -Infinity;
-
-  if (isInfinity || isNaN(value)) {
-    return false;
-  }
-
-  return true;
+  return !(isNaN(value) || !isFinite(value));
 }
 
 function runHomework2() {
