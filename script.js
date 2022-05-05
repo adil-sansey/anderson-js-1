@@ -4,7 +4,9 @@ const value = +prompt('Введите число:');
 const base = +prompt('Введите систему счисления (от 2 до 36 включительно):');
 
 function isNumberValid(value) {
-  if (value === Infinity || value === -Infinity || isNaN(value)) {
+  const isInfinity = value === Infinity || value === -Infinity;
+
+  if (isInfinity || isNaN(value)) {
     return false;
   }
 
@@ -19,7 +21,9 @@ function isBaseValid(value) {
   return true;
 }
 
-if (!isNumberValid(value) || !isNumberValid(base) || !isBaseValid(base)) {
+const isBothNumbersValid = isNumberValid(value) && isNumberValid(base);
+
+if (!isBothNumbersValid || !isBaseValid(base)) {
   console.log('Некорректный ввод!');
 } else {
   console.log(value.toString(base));

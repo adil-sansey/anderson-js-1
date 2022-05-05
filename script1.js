@@ -1,7 +1,9 @@
 'use strict';
 
-function isValidNumber(value) {
-  if (value === Infinity || value === -Infinity || isNaN(value)) {
+function isNumberValid(value) {
+  const isInfinity = value === Infinity || value === -Infinity;
+
+  if (isInfinity || isNaN(value)) {
     return false;
   }
 
@@ -11,14 +13,14 @@ function isValidNumber(value) {
 function runHomework2() {
   const leftOperand = +prompt('Введите число:');
 
-  if (!isValidNumber(leftOperand)) {
+  if (!isNumberValid(leftOperand)) {
     console.log('Некорректный ввод!');
     return;
   }
 
   const rightOperand = +prompt('Введите число:');
 
-  if (!isValidNumber(rightOperand)) {
+  if (!isNumberValid(rightOperand)) {
     console.log('Некорректный ввод!');
     return;
   }
