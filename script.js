@@ -20,23 +20,6 @@ function makeObjectDeepCopy(obj) {
   return copy;
 }
 
-const object = {
-  name: 'Adil',
-  surname: 'Sansey',
-  age: 26,
-
-  null: null,
-  sayHello: function () {
-    console.log(`Hello, from ${this.surname} ${this.name}`);
-  },
-
-  obj: {
-    nested: {},
-  },
-
-  arr: [{ index: 1 }, { index: 2 }, { index: 3 }],
-};
-
 function selectFromInterval(array, start, end) {
   if (!Array.isArray(array)) {
     throw new Error('Ошибка: Некорректный массив!');
