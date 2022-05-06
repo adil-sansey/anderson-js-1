@@ -1,10 +1,41 @@
 'use strict';
 
-function isValidNumber(value) {
-  const isNumber = typeof value === 'number';
+function makeObjectDeepCopy(obj) {
+  let copy;
 
-  return isNumber && !isNaN(value) && isFinite(value);
+  if (Array.isArray(obj)) {
+    copy = [];
+  } else if (isRegularObject(obj)) {
+    copy = {};
+  }
+
+  for (let [key, value] of Object.entries(obj)) {
+    if (isPrimitiveOrFunc(value)) {
+      copy[key] = value;
+    } else {
+      copy[key] = makeObjectDeepCopy(value);
+    }
+  }
+
+  return copy;
 }
+
+const object = {
+  name: 'Adil',
+  surname: 'Sansey',
+  age: 26,
+
+  null: null,
+  sayHello: function () {
+    console.log(`Hello, from ${this.surname} ${this.name}`);
+  },
+
+  obj: {
+    nested: {},
+  },
+
+  arr: [{ index: 1 }, { index: 2 }, { index: 3 }],
+};
 
 function selectFromInterval(array, start, end) {
   if (!Array.isArray(array)) {
@@ -32,7 +63,7 @@ function selectFromInterval(array, start, end) {
   return result;
 }
 
-const myIterable = { from: 1, to: 5 };
+const myIterable = { from: 1, to: 4 };
 
 myIterable[Symbol.iterator] = function () {
   function isValidParams(from, to) {
@@ -47,14 +78,14 @@ myIterable[Symbol.iterator] = function () {
   }
 
   if (this.to < this.from) {
-    throw new Error('Ошибка: from не может быть меньше to!');
+    throw new Error('Ошибка: to не может быть меньше from!');
   }
 
   return {
     current: this.from,
     last: this.to,
 
-    next: function () {
+    next() {
       if (this.current <= this.last) {
         return { done: false, value: this.current++ };
       } else {
@@ -63,3 +94,19 @@ myIterable[Symbol.iterator] = function () {
     },
   };
 };
+
+function isPrimitiveOrFunc(value) {
+  return value === null || typeof value !== 'object';
+}
+
+function isRegularObject(value) {
+  const isArray = Array.isArray(value);
+
+  return !(isArray || isPrimitiveOrFunc(value));
+}
+
+function isValidNumber(value) {
+  const isNumber = typeof value === 'number';
+
+  return isNumber && !isNaN(value) && isFinite(value);
+}
