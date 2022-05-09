@@ -1,6 +1,6 @@
 'use strict';
 
-Array.prototype.myFilter = function (callback, thisArg = undefined) {
+Array.prototype.myFilter = function (callback, thisArg) {
   const result = [];
 
   this.forEach((elem, index, array) => {
