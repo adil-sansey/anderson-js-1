@@ -13,7 +13,9 @@ function concatStrings(str, separator) {
 
   return function curry(str) {
     if (!isValidString(str)) {
-      return strings.join(separator);
+      const result = strings.join(separator);
+
+      return result;
     } else {
       strings.push(str);
 
@@ -34,45 +36,45 @@ class Calculator {
       throw new Error('Ошибка: Параметры не являются валидными числами!');
     }
 
-    Calculator._leftOperand = leftOperand;
-    Calculator._rightOperand = rightOperand;
+    this._leftOperand = leftOperand;
+    this._rightOperand = rightOperand;
   }
 
-  setX(value) {
+  setX = (value) => {
     if (!isValidNumber(value)) {
       throw new Error('Ошибка: Параметр не является валидным числом!');
     }
 
-    Calculator._leftOperand = value;
-  }
+    this._leftOperand = value;
+  };
 
-  setY(value) {
+  setY = (value) => {
     if (!isValidNumber(value)) {
       throw new Error('Ошибка: Параметр не является валидным числом!');
     }
 
-    Calculator._rightOperand = value;
-  }
+    this._rightOperand = value;
+  };
 
-  logSum() {
-    console.log(Calculator._leftOperand + Calculator._rightOperand);
-  }
+  logSum = () => {
+    console.log(sum);
+  };
 
-  logMul() {
-    console.log(Calculator._leftOperand * Calculator._rightOperand);
-  }
+  logMul = () => {
+    console.log(this._leftOperand * this._rightOperand);
+  };
 
-  logSub() {
-    console.log(Calculator._leftOperand - Calculator._rightOperand);
-  }
+  logSub = () => {
+    console.log(this._leftOperand - this._rightOperand);
+  };
 
-  logDiv() {
-    if (Calculator._rightOperand === 0) {
+  logDiv = () => {
+    if (this._rightOperand === 0) {
       throw new Error('Ошибка: Нельзя делить на ноль!');
     }
 
-    console.log(Calculator._leftOperand / Calculator._rightOperand);
-  }
+    console.log(this._leftOperand / this._rightOperand);
+  };
 }
 
 function isValidString(value) {
