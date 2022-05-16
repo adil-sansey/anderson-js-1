@@ -1,9 +1,9 @@
 'use strict';
 
-class StackNode {
+class Node {
   constructor(value) {
     this.value = value;
-    this.prev = null;
+    this.next = null;
   }
 }
 
@@ -26,10 +26,10 @@ class Stack {
       throw new Error('Ошибка: Стек переполнен!');
     }
 
-    const node = new StackNode(value);
+    const node = new Node(value);
 
     if (this._tail) {
-      node.prev = this._tail;
+      node.next = this._tail;
     }
 
     this._tail = node;
@@ -43,7 +43,7 @@ class Stack {
 
     const deletedElement = this._tail.value;
 
-    this._tail = this._tail.prev;
+    this._tail = this._tail.next;
     this._size--;
 
     return deletedElement;
@@ -69,7 +69,7 @@ class Stack {
 
     while (current) {
       array.push(current.value);
-      current = current.prev;
+      current = current.next;
     }
 
     return array.reverse();
@@ -87,23 +87,6 @@ class Stack {
     }
 
     return stack;
-  }
-}
-
-function isValidNumber(value) {
-  const isNumber = typeof value === 'number';
-
-  return isNumber && isFinite(value);
-}
-
-function isIterable(value) {
-  return typeof value[Symbol.iterator] === 'function';
-}
-
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
   }
 }
 
@@ -181,4 +164,14 @@ class LinkedList {
 
     return linkedList;
   }
+}
+
+function isValidNumber(value) {
+  const isNumber = typeof value === 'number';
+
+  return isNumber && isFinite(value);
+}
+
+function isIterable(value) {
+  return typeof value[Symbol.iterator] === 'function';
 }
