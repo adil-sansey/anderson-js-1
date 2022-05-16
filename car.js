@@ -1,7 +1,6 @@
 'use strict';
 
 class Car {
-  #prop = 10;
   #currentFuelVolume = 0;
   #isStarted = false;
   #mileage = 0;
