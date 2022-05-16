@@ -1,5 +1,12 @@
 'use strict';
 
+class StackNode {
+  constructor(value) {
+    this.value = value;
+    this.prev = null;
+  }
+}
+
 class Stack {
   constructor(size) {
     if (size === undefined) {
@@ -11,44 +18,43 @@ class Stack {
     }
 
     this._size = 0;
-    this._storage = {};
+    this._tail = null;
   }
 
   push(value) {
-    const size = this._size;
-
-    if (size === this._MAX_SIZE) {
+    if (this._size === this._MAX_SIZE) {
       throw new Error('Ошибка: Стек переполнен!');
     }
 
+    const node = new StackNode(value);
+
+    if (this._tail) {
+      node.prev = this._tail;
+    }
+
+    this._tail = node;
     this._size++;
-    this._storage[size] = value;
   }
 
   pop() {
-    const size = this._size;
-
-    if (size === 0) {
+    if (this._size === 0) {
       throw new Error('Ошибка: Стек пуст!');
     }
 
+    const deletedElement = this._tail.value;
+
+    this._tail = this._tail.prev;
     this._size--;
-
-    const deletedElement = this._storage[size - 1];
-
-    delete this._storage[size - 1];
 
     return deletedElement;
   }
 
   peek() {
-    const size = this._size;
-
-    if (size === 0) {
+    if (this._size === 0) {
       return null;
     }
 
-    const lastElement = this._storage[size - 1];
+    const lastElement = this._tail.value;
 
     return lastElement;
   }
@@ -58,13 +64,15 @@ class Stack {
   }
 
   toArray() {
-    this._storage.length = this._size;
+    let current = this._tail;
+    const array = [];
 
-    const array = Array.from(this._storage);
+    while (current) {
+      array.push(current.value);
+      current = current.prev;
+    }
 
-    delete this._storage.length;
-
-    return array;
+    return array.reverse();
   }
 
   static fromIterable(iterable) {
