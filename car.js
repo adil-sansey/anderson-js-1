@@ -1,26 +1,31 @@
 'use strict';
 
-export class Car {
-  constructor() {
-    this._currentFuelVolume = 0;
-    this._isStarted = false;
-    this._mileage = 0;
-  }
+class Car {
+  #prop = 10;
+  #currentFuelVolume = 0;
+  #isStarted = false;
+  #mileage = 0;
+  #brand;
+  #model;
+  #yearOfManufacturing;
+  #maxSpeed;
+  #maxFuelVolume;
+  #fuelConsumption;
 
   get currentFuelVolume() {
-    return this._currentFuelVolume;
+    return this.#currentFuelVolume;
   }
 
   get isStarted() {
-    return this._isStarted;
+    return this.#isStarted;
   }
 
   get mileage() {
-    return this._mileage;
+    return this.#mileage;
   }
 
   get brand() {
-    return this._brand;
+    return this.#brand;
   }
 
   set brand(value) {
@@ -34,11 +39,11 @@ export class Car {
       throw new Error('Ошибка: Имя брэнда должно быть от 1 до 50 символов включительно!');
     }
 
-    this._brand = value;
+    this.#brand = value;
   }
 
   get model() {
-    return this._model;
+    return this.#model;
   }
 
   set model(value) {
@@ -52,11 +57,11 @@ export class Car {
       throw new Error('Ошибка: Модель должна быть от 1 до 50 символов включительно!');
     }
 
-    this._model = value;
+    this.#model = value;
   }
 
   get yearOfManufacturing() {
-    return this._yearOfManufacturing;
+    return this.#yearOfManufacturing;
   }
 
   set yearOfManufacturing(value) {
@@ -73,11 +78,11 @@ export class Car {
       );
     }
 
-    this._yearOfManufacturing = value;
+    this.#yearOfManufacturing = value;
   }
 
   get maxSpeed() {
-    return this._maxSpeed;
+    return this.#maxSpeed;
   }
 
   set maxSpeed(value) {
@@ -93,11 +98,11 @@ export class Car {
       );
     }
 
-    this._maxSpeed = value;
+    this.#maxSpeed = value;
   }
 
   get maxFuelVolume() {
-    return this._maxFuelVolume;
+    return this.#maxFuelVolume;
   }
 
   set maxFuelVolume(value) {
@@ -113,11 +118,11 @@ export class Car {
       );
     }
 
-    this._maxFuelVolume = value;
+    this.#maxFuelVolume = value;
   }
 
   get fuelConsumption() {
-    return this._fuelConsumption;
+    return this.#fuelConsumption;
   }
 
   set fuelConsumption(value) {
@@ -125,7 +130,7 @@ export class Car {
       throw new Error('Ошибка: параметр не является числом!');
     }
 
-    this._fuelConsumption = value;
+    this.#fuelConsumption = value;
   }
 
   start() {
@@ -133,7 +138,7 @@ export class Car {
       throw new Error('Машина уже заведена');
     }
 
-    this._isStarted = true;
+    this.#isStarted = true;
   }
 
   shutDownEngine() {
@@ -141,7 +146,7 @@ export class Car {
       throw new Error('Машина ещё не заведена');
     }
 
-    this._isStarted = false;
+    this.#isStarted = false;
   }
 
   fillUpGasTank(value) {
@@ -157,7 +162,7 @@ export class Car {
       throw new Error('Топливный бак переполнен');
     }
 
-    this._currentFuelVolume += value;
+    this.#currentFuelVolume += value;
   }
 
   drive(speed, hours) {
@@ -176,7 +181,7 @@ export class Car {
       throw new Error('Машина не может ехать так быстро');
     }
 
-    if (!this._isStarted) {
+    if (!this.#isStarted) {
       throw new Error('Машина должна быть заведена, чтобы ехать');
     }
 
@@ -187,8 +192,8 @@ export class Car {
       throw new Error('Недостаточно топлива');
     }
 
-    this._currentFuelVolume -= requiredGasAmount;
-    this._mileage += distance;
+    this.#currentFuelVolume -= requiredGasAmount;
+    this.#mileage += distance;
   }
 }
 
