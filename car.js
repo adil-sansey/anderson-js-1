@@ -1,10 +1,22 @@
 'use strict';
 
-class Car {
+export class Car {
   constructor() {
     this._currentFuelVolume = 0;
     this._isStarted = false;
     this._mileage = 0;
+  }
+
+  get currentFuelVolume() {
+    return this._currentFuelVolume;
+  }
+
+  get isStarted() {
+    return this._isStarted;
+  }
+
+  get mileage() {
+    return this._mileage;
   }
 
   get brand() {
@@ -52,8 +64,7 @@ class Car {
       throw new Error('Ошибка: параметр не является числом!');
     }
 
-    const date = new Date();
-    const currentYear = date.getFullYear();
+    const currentYear = new Date().getFullYear();
     const isInRange = value >= 1900 && value <= currentYear;
 
     if (!isInRange) {
@@ -117,20 +128,8 @@ class Car {
     this._fuelConsumption = value;
   }
 
-  get currentFuelVolume() {
-    return this._currentFuelVolume;
-  }
-
-  get isStarted() {
-    return this._isStarted;
-  }
-
-  get mileage() {
-    return this._mileage;
-  }
-
   start() {
-    if (this._isStarted) {
+    if (this.isStarted) {
       throw new Error('Машина уже заведена');
     }
 
@@ -138,7 +137,7 @@ class Car {
   }
 
   shutDownEngine() {
-    if (!this._isStarted) {
+    if (!this.isStarted) {
       throw new Error('Машина ещё не заведена');
     }
 
@@ -152,7 +151,7 @@ class Car {
       throw new Error('Неверное количество топлива для заправки');
     }
 
-    const isIncorrectAmountOfGas = this._currentFuelVolume + value > this._maxFuelVolume;
+    const isIncorrectAmountOfGas = this.currentFuelVolume + value > this.maxFuelVolume;
 
     if (isIncorrectAmountOfGas) {
       throw new Error('Топливный бак переполнен');
@@ -182,7 +181,7 @@ class Car {
     }
 
     const distance = speed * hours;
-    const requiredGasAmount = distance / this.fuelConsumption;
+    const requiredGasAmount = (distance / 100) * this.fuelConsumption;
 
     if (requiredGasAmount > this.currentFuelVolume) {
       throw new Error('Недостаточно топлива');
@@ -202,30 +201,3 @@ function isValidNumber(value) {
 
   return isNumber && isFinite(value);
 }
-
-// brand (строка от 1 до 50 символов включительно)
-// - model (строка от 1 до 50 символов включительно)
-// - yearOfManufacturing (число от 1900 до текущего года включительно)
-// - maxSpeed (число от 100 до 300 км/ч)
-// - maxFuelVolume (число в литрах от 5 до 20)
-// - fuelConsumption (число в л/100км)
-// - currentFuelVolume (число в литрах, по умолчанию 0)
-// - isStarted (логический тип, по умолчанию false)
-// - mileage (число в километрах, по умолчанию 0)
-
-const car = new Car();
-
-car.brand = 'Toyota';
-car.model = 'Toyota Corolla';
-car.yearOfManufacturing = 2010;
-
-car.maxSpeed = 200;
-car.maxFuelVolume = 20;
-car.fuelConsumption = 10;
-car.fillUpGasTank(25);
-
-car.start();
-car.drive(60, 2);
-car.shutDownEngine();
-
-export default Car;
