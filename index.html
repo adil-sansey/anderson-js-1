@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="calculator grid-container">
+      <div class="output">
+        <div class="icon-container">
+          <img
+            class="add-to-bookmarks"
+            src="./img/bookmark-regular.svg"
+            alt="bookmark"
+            width="28"
+            height="28"
+            title="Добавить в Закладки"
+          />
+          <div class="memory-container">
+            <div class="memory-value">M1:</div>
+            <div class="mc">MC</div>
+            <div class="mr">MR</div>
+            <div class="m-minus">M-</div>
+            <div class="m-plus">M+</div>
+          </div>
+          <div class="icon-journal">
+            <img
+              class="icon-journal"
+              src="./img/clock-rotate-left-solid.svg"
+              alt="copy"
+              width="28"
+              height="28"
+              title="Журнал"
+            />
+          </div>
+
+          <img
+            class="icon-copy"
+            src="./img/copy-regular.svg"
+            alt="copy"
+            width="28"
+            height="28"
+            title="Сохранить результат в буфер обмена"
+          />
+        </div>
+
+        <div data-previous-operand class="previous-operand"></div>
+        <hr width="100%" size="1px" color="black" ; />
+        <div data-current-operand class="current-operand"></div>
+      </div>
+      <div data-number="7" class="btn">7</div>
+      <div data-number="8" class="btn">8</div>
+      <div data-number="9" class="btn">9</div>
+      <div data-negative class="btn">+/-</div>
+      <div data-delete class="btn">del</div>
+      <div data-number="4" class="btn">4</div>
+      <div data-number="5" class="btn">5</div>
+      <div data-number="6" class="btn">6</div>
+      <div data-operation="*" class="btn">*</div>
+      <div data-operation="÷" class="btn">÷</div>
+      <div data-number="1" class="btn">1</div>
+      <div data-number="2" class="btn">2</div>
+      <div data-number="3" class="btn">3</div>
+      <div data-operation="-" class="btn">-</div>
+      <div data-equals class="btn span-two">=</div>
+      <div data-all-clear class="btn">C</div>
+      <div data-number="0" class="btn">0</div>
+      <div data-number="." class="btn">.</div>
+      <div data-operation="+" class="btn">+</div>
+      <div class="hidden journal-container">
+        <ul class="journal-list"></ul>
+      </div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
